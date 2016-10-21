@@ -1,0 +1,40 @@
+vector(a,1,1).
+vector(a,1,4).
+vector(a,2,4).
+vector(a,3,5).
+vector(a,4,-1).
+vector(a,5,1).
+vector(a,6,12).
+vector(a,7,1).
+vector(a,8,1).
+vector(a,9,1).
+vector(a,10,1).
+vector(a,11,-4).
+vector(a,12,-3).
+vector(a,13,-4).
+
+
+showMeVector(Name, X, Y):-
+vector(Name, X, Y),
+write('Index=':X),write(' '),
+write('Value=':Y),nl,
+fail.
+
+%base case
+getSumOfVectorElements(Name,1, Sum):- 
+vector(Name,1, Sum).
+%main recursively func.
+getSumOfVectorElements(Name, Index, Sum):- 
+vector(Name, Index, X), 
+Index \=1, Index1 is Index - 1,
+getSumOfVectorElements(Name, Index1, Sum1),
+Sum is Sum1 +  X. 
+
+getFirstNegativeElement(Name, Index, Y):-
+vector(Name, Index, Y),
+Y < 0, 
+write('First negative element is ':Y), !.
+
+min(Name,Min):-
+vector(Name,_,Min),
+not((vector(Name,_,X), X < Min)),!.
