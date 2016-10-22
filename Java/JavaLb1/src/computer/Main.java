@@ -4,7 +4,6 @@
 package computer;
 
 import computer.keeper.ComputerKeeper;
-import java.util.Collection;
 
 
 /**
@@ -21,8 +20,7 @@ public final class Main {
      * @param args command arguments from user
      */
     public  static void main(final String...args) {
-        Collection<SystemBlock> computerKeeper = new ComputerKeeper<>();
-        //ComputerKeeper<SystemBlock> computerKeeper = new ComputerKeeper<>();
+        ComputerKeeper<SystemBlock> computerKeeper = new ComputerKeeper<>();
         computerKeeper.add(new SystemBlock("Dell", "MSIZ170i",
                             "Intel quad Core i3, 2.1 Ggz",
                             "4 GB DDR3 RAM", "Intel HD graphics 768 MB", 382.5));
@@ -36,8 +34,22 @@ public final class Main {
                             "Intel Core i5, 3.1 Ggz",
                             "4 GB DDR3 RAM", "Intel Iris Pro 1 GB", 2000));
 
+      //  computerKeeper.save("data.dat");
         for (SystemBlock obj : computerKeeper) {
             System.out.println(obj.toString());
         }
+        // clear container and test a serializable property
+        computerKeeper.clear();
+        computerKeeper.load("data.dat");
+        // test for event in java
+        SystemBlock sBlock = (SystemBlock) computerKeeper.toArray()[1];
+        sBlock.setPrice(312);
+        sBlock.setGpu("AMD R6");
+        sBlock.setProcessor("AMD A10");
+        sBlock.setProducer("Dell");
+        sBlock.setMotherboard("Dell 154DFXa");
+        sBlock.setRam("6 GB DDR3 RAM");
+        if (!computerKeeper.isSaved())
+            computerKeeper.save("data.dat");
     }
 }

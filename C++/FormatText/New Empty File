@@ -7,14 +7,12 @@
  */
 package computer;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 
 /**
  * class for described a computer object.
  */
-public class SystemBlock implements Serializable {
+public class SystemBlock  {
 
     /** @value described a produser of system block*/
     private String producer;
@@ -28,8 +26,7 @@ public class SystemBlock implements Serializable {
     private String gpu;
     /** @value described a price of computer */
     private double price;
-    /**@value eventSupport  - event producer for this class */
-    private PropertyChangeSupport eventSupport;
+
     /** described a constructor  without parameters */
     public SystemBlock() {
         this.producer = "none";
@@ -38,7 +35,6 @@ public class SystemBlock implements Serializable {
         this.ram = "none";
         this.gpu = "none";
         this.price = 0;
-        this.eventSupport = null;
 
     }
     /**
@@ -49,15 +45,14 @@ public class SystemBlock implements Serializable {
      * @param ram1         a ram type and value
      * @param motherBoard1 a mother board name and description
      * */
-    public SystemBlock(final String producer1, final String motherBoard1, final String processor1,
-                       final String ram1, final String gpu1, final double price1) {
+    public SystemBlock(final String producer1, final String processor1, final String ram1, final String gpu1,
+                       final String motherBoard1, final double price1) {
         this.producer = producer1;
         this.processor = processor1;
         this.ram = ram1;
         this.gpu = gpu1;
         this.price = price1;
         this.motherBoard = motherBoard1;
-        this.eventSupport = new PropertyChangeSupport(this);
 
     }
     /**
@@ -65,25 +60,9 @@ public class SystemBlock implements Serializable {
      * @param producer1 keep info about system block producer
      * */
     public final void setProducer(final String producer1) {
-        eventSupport.firePropertyChange("Producer", this.producer, producer1);
         this.producer = producer1;
-
-    }
-    /**
-     *
-     * @param listener  - listener for object of this class
-     */
-    public final void addListener(final PropertyChangeListener listener) {
-        eventSupport.addPropertyChangeListener(listener);
     }
 
-    /**
-     *
-     * @param listener - listener for object of this class
-     */
-    public final void removeListener(final PropertyChangeListener listener) {
-        eventSupport.removePropertyChangeListener(listener);
-    }
 
     /**
      * get info about system block producer
@@ -96,7 +75,6 @@ public class SystemBlock implements Serializable {
      * @param processor1 keep info about computer  processor
      * */
     public final void setProcessor(final String processor1) {
-        eventSupport.firePropertyChange("Processor", this.processor, processor1);
         this.processor = processor1;
     }
     /**
@@ -110,7 +88,6 @@ public class SystemBlock implements Serializable {
      * @param ram1 keep info about computer  RAM
      * */
     public final void setRam(final String ram1) {
-        eventSupport.firePropertyChange("RAM", this.ram, ram1);
         this.ram = ram1;
     }
     /**
@@ -124,7 +101,6 @@ public class SystemBlock implements Serializable {
      * @param gpu1 keep info about GPU of computer
      * */
     public final void setGpu(final String gpu1) {
-        eventSupport.firePropertyChange("GPU", this.gpu, gpu1);
         this.gpu = gpu1;
     }
 
@@ -139,7 +115,6 @@ public class SystemBlock implements Serializable {
      * @param price1 keep info about computer  processor
      * */
     public final void setPrice(final double price1) {
-        eventSupport.firePropertyChange("Price", this.price, price1);
         this.price = price1;
     }
 
@@ -154,7 +129,6 @@ public class SystemBlock implements Serializable {
      * @param motherBoard1 keep info about computer motherboard
      * */
     public final void setMotherboard(final String motherBoard1) {
-        eventSupport.firePropertyChange("MotherBoard", this.motherBoard, motherBoard1);
         this.motherBoard = motherBoard1;
     }
 
@@ -179,7 +153,6 @@ public class SystemBlock implements Serializable {
         builder.append("Price: " + price + '\n');
         return  builder.toString();
     }
-
 
 
 

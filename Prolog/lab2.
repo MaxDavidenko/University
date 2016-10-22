@@ -1,0 +1,2 @@
+range(A,_A).
+range(A,B,X):- A < B, A1 is A -1, range(A1,B,X).

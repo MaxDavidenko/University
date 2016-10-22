@@ -1,40 +1,51 @@
-#include <QCoreApplication>
-#include <QString>
-#include <QFile>
+#include "refactor.h"
 #include <QVector>
-#include <QTextStream>
 #include <iostream>
-#include <limits.h>
-QString text;
-int saveFile(QString fileName);
-void toStartPosition();
-void AlignScopes(QChar chr);
-int Formatting(QString & text, int start, int end, int count);
-void align(QString &text,int &start, int & end, int count);
-int main(int argc, char *argv[])
-{
-    QCoreApplication a(argc, argv);
-    QFile file("//home/max//Code//C++//FormatText//SystemBlock.txt");
-    if(file.open(QIODevice::ReadOnly))
-    {
-        QTextStream reader(&file);
-        text = reader.readAll();
-        AlignScopes('{');
-        toStartPosition();
-        Formatting(text, 0, text.size(), 0);
-    }
-    QFile fileW("//home/max//Code//C++//FormatText//file.txt");
-    if (fileW.open(QIODevice::WriteOnly))
-    {
-        QTextStream stream(&fileW);
-        stream << text;
-        file.close();
-    }
-    return a.exec();
-
+Refactor::Refactor() {
+    
 }
 
-void toStartPosition()
+bool Refactor::isNameOfVariable(QChar ch) const {
+    return ((ch >= QChar('a') && ch <= QChar('z')) || (ch >= QChar('A') && ch <= QChar('Z')) || ch == QChar('_') || (ch >= QChar('0') && ch <= QChar('9')));
+}
+
+QString Refactor::rename(QString sourceCode, QString sourceVar, QString resultVar) {
+    for(int i = 0, j = 0, lenght = sourceCode.length(); i < lenght; ++i) {
+        if(sourceCode[i] == '/' && sourceCode[i + 1] == '/') {
+            for(; sourceCode[i] != '\n' && i < lenght; ++i);
+        }
+        
+        if(sourceCode[i] == '/' && sourceCode[i + 1] == '*') {
+            for(; sourceCode[i] != '*' && sourceCode[i + 1] == '/' && i < lenght; ++i);
+        }
+        
+        if(sourceCode[i] == sourceVar[j]) {
+            j++;
+            if(j == sourceVar.length()) {
+                if((i + 1 < lenght || i - j >= 0 ? !isNameOfVariable(sourceCode[i + 1]) : true) 
+                     && (i - j < 0 ? true : !isNameOfVariable(sourceCode[i - j]))) {
+                    i -= sourceVar.length() - 1;
+                    sourceCode.remove(i, sourceVar.length());
+                    sourceCode.insert(i, resultVar);
+                    }
+                j = 0;
+            }    
+        }
+        else j = 0;
+    }
+    return sourceCode;
+}
+
+QString Refactor::formatting(QString sourceCode) {
+    AlignScopes(sourceCode);
+    toStartPosition(sourceCode);
+    blocksFormatting(sourceCode, 0, sourceCode.size(), 0);
+    std::cout << sourceCode.toStdString() << '\n';
+    return sourceCode;
+}
+
+
+void Refactor::toStartPosition(QString & text)
 {
     int end = text.size();
     int next = 0;
@@ -45,7 +56,7 @@ void toStartPosition()
             break;
       expr_end.push_back(text.indexOf(QRegExp("[\\/\\*]"), start));
       expr_end.push_back(text.indexOf(QRegExp("[\\*\\/]"), start));
-      expr_end.push_back(text.indexOf(QRegExp("[\\w]"), start));
+      expr_end.push_back(text.indexOf(QRegExp("[-\\w]"), start));
       expr_end.push_back(text.indexOf(QRegExp("[\\{]"), start));
       expr_end.push_back(text.indexOf(QRegExp("[\\}]"), start));
       for (int i = 0; i < expr_end.size();++i)
@@ -57,34 +68,7 @@ void toStartPosition()
       expr_end.clear();
     }
 }
-/*
-void AlignScopes(QChar chr)
-{
-    int start = text.indexOf('{');
-    int start2 = text.indexOf('}');
-    QVector<int>  expr_end;
-    int res = 0;
-    start = start < start2? start:start2;
-    int end = text.size();
-    while (start > 0 && start < end)
-    {
-        if ( text.at(start - 1) != '\n' &&
-           (text.at(start) == '{' || text.at(start) == '}'))
-        {
-            QString st('\n');
-            st.append(text.at(start));
-            st.append(text.at(start +1));
-            text.replace(start, 1, ' ');
-            text.insert(start,st);
-            end = text.size();
-        }
-        start = text.indexOf("{", start +4, Qt::CaseInsensitive);
-        start2 = text.indexOf("}", start +4, Qt::CaseInsensitive);
-        start = start < start2? start:start2;
-    }
-}*/
-
-void AlignScopes(QChar chr)
+void Refactor::AlignScopes(QString & text)
 {
     int start = text.indexOf('{');
     int start2 = text.indexOf('}');
@@ -116,9 +100,11 @@ void AlignScopes(QChar chr)
             }
             QString st('\n');
             st.append(text.at(start));
-            st.append(text.at(start +1));
-            text.replace(start, 1, ' ');
-            text.insert(start,st);
+            if (text.at(start +1) != '\n')
+            st.append('\n');
+            //st.append(text.at(start +1));
+            text.replace(start, 1, "");
+            text.insert(start, st);
             end = text.size();
         }
         start = text.indexOf("{", start +4, Qt::CaseInsensitive);
@@ -126,7 +112,8 @@ void AlignScopes(QChar chr)
         start = start < start2? start:start2;
     }
 }
-int Formatting(QString & text, int start, int end, int count)
+
+int Refactor::blocksFormatting(QString & text, int start, int end, int count)
 {
    while (start < end -1 && start >= 0)
    {
@@ -135,6 +122,7 @@ int Formatting(QString & text, int start, int end, int count)
           align(text,start, end, count);
           start = text.indexOf('\n', start +1);
           count += 1;
+          continue;
       }
       else if (text.at(start +1) == '}')
           count -= 1;
@@ -143,10 +131,8 @@ int Formatting(QString & text, int start, int end, int count)
    }
    return start;
 }
-void align(QString &text,int &start, int & end, int count) {
+void Refactor::align(QString &text,int &start, int & end, int count) {
     text.insert(start+1, QString(count*4, ' '));
-    std::cout << text.toStdString() << '\n';
+    //std::cout << text.toStdString() << '\n';
     end += count * 4;
 }
-
-
