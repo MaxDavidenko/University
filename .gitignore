@@ -1,0 +1,6 @@
+*.o
+*.moc
+*.pro.user
+*.txt
+*.class
+*.out
