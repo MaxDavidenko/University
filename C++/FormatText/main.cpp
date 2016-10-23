@@ -12,6 +12,8 @@ void AlignScopes(QChar chr);
 int Formatting(QString & text, int start, int end, int count);
 void align(QString &text,int &start, int & end, int count);
 void regExpTest();
+void AlignScopes();
+void alignRightSide();
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -21,10 +23,12 @@ int main(int argc, char *argv[])
         QTextStream reader(&file);
         text = reader.readAll();
         regExpTest();
-        std::cout << text.toStdString();
-        //AlignScopes('{');
+        AlignScopes();
+        alignRightSide();
         //toStartPosition();
-        //Formatting(text, 0, text.size(), 0);
+       // Formatting(text, 0, text.size(), 0);
+        std::cout << text.toStdString();
+
     }
     QFile fileW("//home/max//Code//C++//FormatText//file.txt");
     if (fileW.open(QIODevice::WriteOnly))
@@ -38,48 +42,42 @@ int main(int argc, char *argv[])
 }
 
 void regExpTest() {
-    //QRegularExpression regEx("^\\t+\")
-    //int pos  = text.indexOf(QRegExp("\\t+ \\"), 0);
     int start = 0;
     int end   = 0;
-    int end2  = 0;
     while (start >= 0 && end >= 0) {
         start = text.indexOf(QRegExp("^\\t+|\\s+"), start);
         end   = text.indexOf(QRegExp("\\w|[{]|[}]|[*]|[/*]|[//]"),start);
-        //end2  = text.indexOf(QRegExp("[A-Za-Z]"));
-        //if (end2 < 0)
-       //     end2= INT_MAX;
-        //end  = std::min(end, end2);
-        if (end != start)
         text.replace(start, end - start, "");
-        start = text.indexOf("\n",start);
+        start = text.indexOf("\n", start);
         ++start;
     }
 }
-
-void toStartPosition()
-{
-    int end = text.size();
-    int next = 0;
-    QVector<int>  expr_end;
-    for (int start = 0; start < end && start >= 0;++start)
-    {
-        if ((start =  text.indexOf('\n', start + 1)) < 0)
-            break;
-      expr_end.push_back(text.indexOf(QRegExp("[\\/\\*]"), start));
-      expr_end.push_back(text.indexOf(QRegExp("[\\*\\/]"), start));
-      expr_end.push_back(text.indexOf(QRegExp("[\\w]"), start));
-      expr_end.push_back(text.indexOf(QRegExp("[\\{]"), start));
-      expr_end.push_back(text.indexOf(QRegExp("[\\}]"), start));
-      for (int i = 0; i < expr_end.size();++i)
-            if(expr_end.at(i) == -1)
-                expr_end[i] = INT32_MAX;
-      next = (*std::min_element(expr_end.data(), expr_end.data()
-                                + expr_end.size()));
-      text.replace(start, next - start, "\n");
-      expr_end.clear();
+/*
+void AlignScopes() {
+    int start = 0;
+    int end   = 0;
+    int end2   = 0;
+    while (start >= 0 && end >=0) {
+        start = text.indexOf("\n", start);
+        end  = text.indexOf(QRegExp("(?!=\\n.*[//]|[/*]|[*].*)[{]"),start);
+        end2  = text.indexOf(QRegExp("[//]|[/*][*].*[}]"), start);
+         if (end < end2)
+        text.replace(end,"\n{\n");
+        else  text.replace(end2,"\n}\n");
+         start = end < end2? end : end2;;
     }
 }
+*/
+void alignRightSide() {
+   int start = 0;
+   int end = 0;
+   while (start >=0 && end >=0) {
+       end = text.indexOf(QRegExp("\\n[{]"), end);
+       start   = text.lastIndexOf(QRegExp("\\w|)"), end);
+       text.replace(start, end - start, "");
+   }
+}
+
 /*
 void AlignScopes(QChar chr)
 {
@@ -106,8 +104,7 @@ void AlignScopes(QChar chr)
         start = start < start2? start:start2;
     }
 }*/
-
-void AlignScopes(QChar chr)
+void AlignScopes()
 {
     int start = text.indexOf('{');
     int start2 = text.indexOf('}');
@@ -118,8 +115,7 @@ void AlignScopes(QChar chr)
     while (start > 0 && start < end)
     {
         expr_end.clear();
-        if ( text.at(start - 1) != '\n' &&
-           (text.at(start) == '{' || text.at(start) == '}'))
+        if (start > 0)
         {
             expr_end.push_back(text.lastIndexOf('\n', start));
             expr_end.push_back(text.indexOf('\n', start + 1));
@@ -140,7 +136,7 @@ void AlignScopes(QChar chr)
             QString st('\n');
             st.append(text.at(start));
             st.append(text.at(start +1));
-            text.replace(start, 1, ' ');
+            text.replace(start, 1, "");
             text.insert(start,st);
             end = text.size();
         }
@@ -168,7 +164,6 @@ int Formatting(QString & text, int start, int end, int count)
 }
 void align(QString &text,int &start, int & end, int count) {
     text.insert(start+1, QString(count*4, ' '));
-    std::cout << text.toStdString() << '\n';
     end += count * 4;
 }
 
