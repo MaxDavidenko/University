@@ -11,6 +11,7 @@ void toStartPosition();
 void AlignScopes(QChar chr);
 int Formatting(QString & text, int start, int end, int count);
 void align(QString &text,int &start, int & end, int count);
+void regExpTest();
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -19,9 +20,11 @@ int main(int argc, char *argv[])
     {
         QTextStream reader(&file);
         text = reader.readAll();
-        AlignScopes('{');
-        toStartPosition();
-        Formatting(text, 0, text.size(), 0);
+        regExpTest();
+        std::cout << text.toStdString();
+        //AlignScopes('{');
+        //toStartPosition();
+        //Formatting(text, 0, text.size(), 0);
     }
     QFile fileW("//home/max//Code//C++//FormatText//file.txt");
     if (fileW.open(QIODevice::WriteOnly))
@@ -32,6 +35,26 @@ int main(int argc, char *argv[])
     }
     return a.exec();
 
+}
+
+void regExpTest() {
+    //QRegularExpression regEx("^\\t+\")
+    //int pos  = text.indexOf(QRegExp("\\t+ \\"), 0);
+    int start = 0;
+    int end   = 0;
+    int end2  = 0;
+    while (start >= 0 && end >= 0) {
+        start = text.indexOf(QRegExp("^\\t+|\\s+"), start);
+        end   = text.indexOf(QRegExp("\\w|[{]|[}]|[*]|[/*]|[//]"),start);
+        //end2  = text.indexOf(QRegExp("[A-Za-Z]"));
+        //if (end2 < 0)
+       //     end2= INT_MAX;
+        //end  = std::min(end, end2);
+        if (end != start)
+        text.replace(start, end - start, "");
+        start = text.indexOf("\n",start);
+        ++start;
+    }
 }
 
 void toStartPosition()
