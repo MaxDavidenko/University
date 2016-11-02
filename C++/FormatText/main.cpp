@@ -4,17 +4,17 @@
 #include <QVector>
 #include <QTextStream>
 #include <iostream>
+#include <regex>
+#include <QRegularExpression>
 #include <limits.h>
 QString text;
 int saveFile(QString fileName);
-void toStartPosition();
 void AlignScopes(QChar chr);
-int Formatting(QString & text, int start, int end, int count);
+int alignBlocks(QString & text, int start, int end, int count);
 void align(QString &text,int &start, int & end, int count);
-void regExpTest();
+void alignToLeftSide(QString &text);
 void AlignScopes();
-void alignRightSide();
-void removeExtraDelimiters(QString &text, int pos);
+void alignRightSide(QString &text);
 bool checkOnComment(QString &text, int start);
 int main(int argc, char *argv[])
 {
@@ -24,10 +24,9 @@ int main(int argc, char *argv[])
     {
         QTextStream reader(&file);
         text = reader.readAll();
-        regExpTest();
-        alignRightSide();
-        AlignScopes();
-        Formatting(text, 0, text.size(), 0);
+        alignToLeftSide(text);
+        alignRightSide(text);
+        //alignBlocks(text, 0, text.size(), 0);
         std::cout << text.toStdString ();
 
     }
@@ -41,22 +40,10 @@ int main(int argc, char *argv[])
     return a.exec();
 
 }
-void removeExtraDelimiters(QString &text, int start) {
-    int end = text.indexOf(QRegExp("\\w"), start);
-    text.replace(start+1, end - start +1, "\n");
-   // text.replace(QRegExp("\\{"),"\n\{\n");
-}
+void alignToLeftSide(QString &text) {
+    text.replace(QRegExp("\\n\\s+|\\t+\\<"),"\n");
 
-void regExpTest() {
-    int start = 0;
-    int end   = 0;
-    while (start >= 0 && end >= 0) {
-        start = text.indexOf(QRegExp("^\\t+|\\s+"), start);
-        end   = text.indexOf(QRegExp("\\w|[{]|[}]|[*]|[/\\*]|[//]"),start);
-        text.replace(start, end - start, "");
-        start = text.indexOf("\n", start);
-        ++start;
-    }
+    //  ((\/\/|\/\*|\*).*\{) -> все те, которые заключены в коментарий
 }
 bool checkOnComment(QString &text, int start) {
     bool res = false;
@@ -75,6 +62,11 @@ bool checkOnComment(QString &text, int start) {
 }
 
 void AlignScopes() {
+
+    //\}(?!(\/\/.*(?=(\})))), "}\n"
+    //\{(?!(\/\/.*(?=(\})))), "\n{"
+
+    /*
     int start = text.indexOf("\n", 0);
     int end   = text.lastIndexOf(QRegExp("\\{"), start);
     int end2  = text.lastIndexOf(QRegExp("\\}"), start);
@@ -107,23 +99,45 @@ void AlignScopes() {
          start = text.indexOf("\n", start +1);
          end  = text.indexOf(QRegExp("\\{"), start);
          end2  = text.indexOf(QRegExp("\\}"), start);
-     }
+     }*/
+}
+void alignRightSide(QString &text)
+{
+   std::string tmp_str(text.toStdString());
+   std::reverse(tmp_str.begin(), tmp_str.end());
+   text.clear();
+   text += tmp_str.c_str();
+   std::cout << text.toStdString() << "\n\n\n";
+   int t = text.indexOf(QRegExp("\\s*\\t*[{]\\s*\\t*(?!(.*\\/\\/|\\*\\/))"), 0);
+   text.replace(QRegularExpression("\\s*\\t*\\{\\s*\\t*(?!(.*\\/\\/|\\*\\/*))"), "\n{\n");
+   text.replace(QRegularExpression("\\s*\\t*\\}\\s*\\t*(?!(.*\\/\\/|\\/\\*))"), "\n}\n");
+   tmp_str.clear();
+   tmp_str += text.toStdString();
+   std::reverse(tmp_str.begin(), tmp_str.end());
+   text.clear();
+   text += tmp_str.c_str();
+
 }
 
+/*
 void alignRightSide() {
-   int start = 0;
-   int start2 = 0;
-   int end = 0;
+   int end = text.indexOf(QRegExp("\\{"), 0);
+   int start = text.lastIndexOf(QRegExp("\\w"), end);
+   int start2 = text.lastIndexOf(QRegExp("\\)"), end);
    while (start >=0 && end >=0) {
-       end = text.indexOf(QRegExp("\\{"), end +1);
-       start   = text.lastIndexOf(QRegExp("\\w"), end);
-       start2   = text.lastIndexOf(QRegExp("\\)"), end);
        if (checkOnComment(text, text.lastIndexOf("\n", end)))
+       {
+            end++;
             continue;
+       }
        if (start2 > start && start2 >0)
             text.replace(start2, end - start2 , ")");
        else if (start > start2)
                text.replace(start, end - start, text.at(start));
+       end = text.indexOf(QRegExp("\\{"), end +1);
+       start   = text.lastIndexOf(QRegExp("\\w"), end);
+       start2   = text.lastIndexOf(QRegExp("\\)"), end);
+
    }
    start = 0;
    end = 0;
@@ -135,91 +149,8 @@ void alignRightSide() {
        text.replace(start, end - start , "{\n");
    }
 }
-
-/*
-   while (start >=0 && end >=0) {
-       end = text.indexOf(QRegExp("\\{|\\}"), end +1);
-       start   = text.lastIndexOf(QRegExp("\\w|\\)"), end);
-       if (checkOnComment(text, text.lastIndexOf("\n", end)))
-            continue;
-       text.replace(start, end - start , ")");
-   }
-void AlignScopes(QChar chr)
-{
-    int start = text.indexOf('{');
-    int start2 = text.indexOf('}');
-    QVector<int>  expr_end;
-    int res = 0;
-    start = start < start2? start:start2;
-    int end = text.size();
-    while (start > 0 && start < end)
-    {
-        if ( text.at(start - 1) != '\n' &&
-           (text.at(start) == '{' || text.at(start) == '}'))
-        {
-            QString st('\n');
-            st.append(text.at(start));
-            st.append(text.at(start +1));
-            text.replace(start, 1, ' ');
-            text.insert(start,st);
-            end = text.size();
-        }
-        start = text.indexOf("{", start +4, Qt::CaseInsensitive);
-        start2 = text.indexOf("}", start +4, Qt::CaseInsensitive);
-        start = start < start2? start:start2;
-    }
-}*/
-/*
-void AlignScopes() {
-    int start = text.indexOf(QRegExp("[{]"), 0);
-    int start2 = text.indexOf(QRegExp("[}]"), 0);
-    QVector<int>  expr_end;
-    int res = 0;
-    start = start < start2? start:start2;
-    int end = text.size();
-    while (start > 0 && start < end) {
-        expr_end.clear();
-        if (start > 0) {
-            expr_end.push_back(text.lastIndexOf('\n', start));
-            expr_end.push_back(text.indexOf('\n', start + 1));
-            expr_end.push_back(text.lastIndexOf(QRegExp("[//*]"), start));
-            expr_end.push_back(text.lastIndexOf(QRegExp("[*]"), start));
-            expr_end.push_back(text.lastIndexOf(QRegExp("[//]"), start));
-            for (int i = 2; i < expr_end.size();++i)
-                  if(expr_end.at(i) == -1 || expr_end.at(i) < expr_end[0])
-                      expr_end[i] = INT32_MAX;
-            res = (*std::min_element(expr_end.data() + 2, expr_end.data()
-                                      + expr_end.size()));
-
-            if (res >= expr_end[0] && res < expr_end[1] && res < start) {
-                start  = text.indexOf(QRegExp("[{]"), start +1);
-                start2 = text.indexOf(QRegExp("[}]"), start -1);
-                start = start < start2? start : start2;
-                continue;
-            }
-            QString st;
-            if (text.at(start -1) != '\n') {
-                st.append('\n');
-            }
-            st.append(text.at(start));
-            if (text.at(start + 1) != '\n') {
-                st.append('\n');
-            }
-            else {
-                st.append(text.at(start + 1));
-            }
-            text.remove(start, 1);
-            text.insert(start, st);
-            end = text.size();
-        }
-        start  = text.indexOf(QRegExp("[{]"), start + 4);
-        start2 = text.indexOf(QRegExp("[}]"), start + 4);
-        //start = text.indexOf("{", start +4, Qt::CaseInsensitive);
-        //start2 = text.indexOf("}", start +4, Qt::CaseInsensitive);
-        start = start < start2? start : start2;
-    }
-}*/
-int Formatting(QString & text, int start, int end, int count)
+*/
+int alignBlocks(QString & text, int start, int end, int count)
 {
    while (start < end -1 && start >= 0)
    {
