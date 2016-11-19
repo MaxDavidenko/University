@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+QMAKE_CXXFLAGS += -std=gnu++11
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = lab3InterfaceStub
@@ -17,4 +17,8 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    settings.ui
+
+RESOURCES += \
+    gallery.qrc
