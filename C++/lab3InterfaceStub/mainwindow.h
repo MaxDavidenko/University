@@ -17,6 +17,18 @@ public:
 
 public slots:
     void showSettingPanel();
+    void generateCodeDialogCall();
+private slots:
+    void on_saveButton_clicked();
+
+    void on_OpenButton_clicked();
+
+    void on_exportProjectButton_clicked();
+
+    void on_createNewFileButton_clicked();
+
+    void on_settingsButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
