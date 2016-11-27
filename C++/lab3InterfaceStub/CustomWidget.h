@@ -1,11 +1,20 @@
 #ifndef CUSTOMWIDGET_H
 #define CUSTOMWIDGET_H
-
-
-class CustomWidget
+#include <QWidget>
+#include <QMouseEvent>
+#include <QContextMenuEvent>
+class CustomWidget : public QWidget
 {
+  Q_OBJECT
 public:
-    CustomWidget();
+    explicit CustomWidget(QWidget *parent = 0);
+    void mousePressEvent(QMouseEvent *event);
+    virtual ~CustomWidget();
+public slots:
+    void ShowCustomContexMenu(const QPoint &p);
+signals:
+    void changeToDefaultCursor();
+
 };
 
 #endif // CUSTOMWIDGET_H

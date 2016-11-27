@@ -13,12 +13,19 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    CustomButton.cpp \
+    CustomWidget.cpp \
+    customdialog.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    CustomButton.h \
+    CustomWidget.h \
+    customdialog.h
 
 FORMS    += mainwindow.ui \
-    settings.ui
+    settings.ui \
+    createnewdialog.ui
 
 RESOURCES += \
     gallery.qrc

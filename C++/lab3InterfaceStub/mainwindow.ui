@@ -83,10 +83,22 @@ background-color: #c1d9d9;
         <height>38</height>
        </size>
       </property>
+      <property name="baseSize">
+       <size>
+        <width>691</width>
+        <height>38</height>
+       </size>
+      </property>
       <property name="styleSheet">
        <string notr="true">QWidget
 {
 background-color: #c1d9d9;
+}
+QPushButton
+{
+border-width:1px;
+padding: 1px;
+border-style: inset;
 }</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -111,7 +123,7 @@ background-color: #c1d9d9;
           <number>0</number>
          </property>
          <property name="sizeConstraint">
-          <enum>QLayout::SetMinimumSize</enum>
+          <enum>QLayout::SetDefaultConstraint</enum>
          </property>
          <property name="rightMargin">
           <number>30</number>
@@ -120,17 +132,29 @@ background-color: #c1d9d9;
           <number>0</number>
          </property>
          <item>
-          <widget class="QPushButton" name="createNewFileButton">
+          <widget class="CustomButton" name="createNewFileButton">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+            <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
            </property>
            <property name="styleSheet">
             <string notr="true">QPushButton{
-background-image: url(:/new/prefix1/gallery/transparent.png);
-image: url(:/new/prefix1/gallery/createNewProject.png); 
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
+image: url(:/new/prefix1/gallery/createNewProjectButton.png); 
 }</string>
            </property>
            <property name="text">
@@ -139,18 +163,126 @@ image: url(:/new/prefix1/gallery/createNewProject.png);
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="OpenButton">
+          <widget class="CustomButton" name="OpenButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton
+{
+image: url(:/new/prefix1/gallery/openExistingFileButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="CustomButton" name="saveButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton
+{
+image: url(:/new/prefix1/gallery/SaveProjectButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="CustomButton" name="revertLastChanges">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton
+{
+image: url(:/new/prefix1/gallery/revertLastChangesButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="CustomButton" name="revertLastRevert">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>36</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/openExistingFile.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/revertLastRevertButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
            </property>
            <property name="text">
@@ -159,164 +291,164 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="saveButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton
-{
-image: url(:/new/prefix1/gallery/SaveProject.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
-}</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="revertLastChanges">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton
-{
-image: url(:/new/prefix1/gallery/revertLastChanges.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
-}</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="revertLastRevert">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton
-{
-image: url(:/new/prefix1/gallery/revertLastRevert.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
-}</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="exportProjectButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton
-{
-image: url(:/new/prefix1/gallery/export.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
-}</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="CloseProjectButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton
-{
-image: url(:/new/prefix1/gallery/closeProject.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
-}</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="functionalityPictogramButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton
-{
-image: url(:/new/prefix1/gallery/functionallityPictogram.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
-}</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="settingsButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton
-{
-image: url(:/new/prefix1/gallery/settingsWindow.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
-}</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="searchButton">
+          <widget class="CustomButton" name="exportProjectButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
            <property name="baseSize">
             <size>
-             <width>33</width>
-             <height>35</height>
+             <width>36</width>
+             <height>0</height>
             </size>
            </property>
            <property name="styleSheet">
             <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/search.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/exportButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="CustomButton" name="CloseProjectButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton
+{
+image: url(:/new/prefix1/gallery/closeProjectButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="CustomButton" name="functionalityPictogramButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton
+{
+image: url(:/new/prefix1/gallery/functionallityPictogramButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="CustomButton" name="settingsButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton
+{
+image: url(:/new/prefix1/gallery/settingsWindowButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="CustomButton" name="searchButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="mouseTracking">
+            <bool>false</bool>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton
+{
+image: url(:/new/prefix1/gallery/searchButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
            </property>
            <property name="text">
@@ -380,142 +512,250 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="createDiagramOfPrecendenceButton">
+          <widget class="CustomButton" name="createNewDiagramOfPrecendenceButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>32</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/createNewDiagramOfPrecendence.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/createNewDiagramOfPrecendenceButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
            </property>
            <property name="text">
             <string/>
            </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="createClassDiagramButton">
+          <widget class="CustomButton" name="createClassDiagramButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>32</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/createClassDiagram.png);
+image: url(:/new/prefix1/gallery/createClassDiagramButton.png);
 background-image: url(:/new/prefix1/gallery/transparent.png);
 }</string>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="createSequenceDiagramButton">
+          <widget class="CustomButton" name="createSequenceDiagramButton">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+            <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>32</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/createSequenceDiagram.png);
+image: url(:/new/prefix1/gallery/createSequenceDiagramButton.png);
 background-image: url(:/new/prefix1/gallery/transparent.png);
 }</string>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="createCommunicationDiagramButton">
+          <widget class="CustomButton" name="createCommunicationDiagramButton">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+            <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>32</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/createCommunicationDiagram.png);
+image: url(:/new/prefix1/gallery/createCommunicationDiagramButton.png);
 background-image: url(:/new/prefix1/gallery/transparent.png);
 }</string>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="createStateDiagramButton">
+          <widget class="CustomButton" name="createStateDiagramButton">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+            <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>32</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/createStateDiagram.png);
+image: url(:/new/prefix1/gallery/createStateDiagramButton.png);
 background-image: url(:/new/prefix1/gallery/transparent.png);
 }</string>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="createActionDiagramButton">
+          <widget class="CustomButton" name="createActivityDiagramButton">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+            <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>32</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/createActivityDiagram.png);
+image: url(:/new/prefix1/gallery/createActivityDiagramButton.png);
 background-image: url(:/new/prefix1/gallery/transparent.png);
 }</string>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_11">
+          <widget class="CustomButton" name="createDeployDiagramButton">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+            <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>32</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/createDeployDiagram.png);
+image: url(:/new/prefix1/gallery/createDeployDiagramButton.png);
 background-image: url(:/new/prefix1/gallery/transparent.png);
 }</string>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -633,7 +873,7 @@ color:#394040;
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="addDiagramButton">
+           <widget class="CustomButton" name="addDiagramPacketButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -642,24 +882,27 @@ color:#394040;
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/addDiagramPacket.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/addDiagramPacketButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="addClassToDiagramButton">
+           <widget class="CustomButton" name="addClassOnDiagrammButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -668,24 +911,27 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/addClassToDiagramm.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/addClassOnDiagrammButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="AddAsssociacionLinkButton">
+           <widget class="CustomButton" name="addAssociationLinkButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -694,24 +940,27 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/addAssociationLink.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/addAssociationLinkButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="AddAgregationLinkButton">
+           <widget class="CustomButton" name="addAgregationLinkButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -720,24 +969,27 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/addAgregationLink.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/addAgregationLinkButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="addCompositionLinkButton">
+           <widget class="CustomButton" name="addCompositionLinkButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -752,24 +1004,27 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/addCompositionLink.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/addCompositionLinkButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="addFiniteAssociationLinkButton">
+           <widget class="CustomButton" name="addFiniteLinkButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -784,24 +1039,27 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/addFiniteLink.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/addFiniteLinkButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="addGeneralizationLinkButton">
+           <widget class="CustomButton" name="addGeneralizationLinkButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -816,24 +1074,27 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/addGeneralizationLink.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/addGeneralizationLinkButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="addnewInterfaceButton">
+           <widget class="CustomButton" name="addNewInterfaceOnDiagramButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -848,24 +1109,27 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/addNewInterfaceOnDiagram.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/addNewInterfaceOnDiagramButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="addRealizationLinkButton">
+           <widget class="CustomButton" name="addRealizationLinkOnDiagramButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -880,24 +1144,27 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/addRealizationLinkOnDiagram.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/addRealizationLinkOnDiagramButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="addNewAttributeButton">
+           <widget class="CustomButton" name="createNewAttributeButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -912,24 +1179,27 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/createNewAttribute.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/createNewAttributeButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="addNewOperationButton">
+           <widget class="CustomButton" name="createNewOperationButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -944,24 +1214,27 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/createNewOperation.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/createNewOperationButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="addAssotiationClass">
+           <widget class="CustomButton" name="createAssociationClassButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -976,24 +1249,62 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/createAssociationClass.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/createAssociationClassButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="addCommentOnDiagramButton">
+           <widget class="CustomButton" name="addCommentOnDiagramButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>36</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="baseSize">
+             <size>
+              <width>36</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton
+{
+image: url(:/new/prefix1/gallery/addCommentOnDiagramButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="CustomButton" name="addCommentLingOnDiagramButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -1008,51 +1319,22 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             </property>
             <property name="baseSize">
              <size>
-              <width>27</width>
+              <width>36</width>
               <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton
 {
-image: url(:/new/prefix1/gallery/addCommentOnDiagram.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
+image: url(:/new/prefix1/gallery/addCommentLingOnDiagramButton.png);
+background-image: url(:/new/prefix1/gallery/transparentButton.png);
 }</string>
             </property>
             <property name="text">
              <string/>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="addCommentLinkOnDiagramButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>27</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="baseSize">
-             <size>
-              <width>27</width>
-              <height>23</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton
-{
-image: url(:/new/prefix1/gallery/addCommentLingOnDiagram.png);
-background-image: url(:/new/prefix1/gallery/transparent.png);
-}</string>
-            </property>
-            <property name="text">
-             <string/>
+            <property name="checkable">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -1072,7 +1354,7 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
          </layout>
         </item>
         <item>
-         <widget class="QWidget" name="Canvas" native="true">
+         <widget class="CustomWidget" name="Canvas" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
             <horstretch>0</horstretch>
@@ -1085,11 +1367,14 @@ background-image: url(:/new/prefix1/gallery/transparent.png);
             <height>250</height>
            </size>
           </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::CustomContextMenu</enum>
+          </property>
           <property name="styleSheet">
-           <string notr="true">QWidget
-{
-background-color: #fcfaf2;
-}</string>
+           <string notr="true">
+background-color: rgb(255, 255, 255);
+alternate-background-color: rgb(255, 255, 255);
+</string>
           </property>
          </widget>
         </item>
@@ -1115,7 +1400,7 @@ color:  #394040;
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="propertiesTab">
            <property name="accessibleName">
@@ -1427,10 +1712,7 @@ backgroud-color: #fffffc;
             <item>
              <widget class="QWidget" name="widget_4" native="true">
               <property name="styleSheet">
-               <string notr="true">QListView
-{
-backgroud-color: #fffffc;
-}</string>
+               <string notr="true"/>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_6">
                <item>
@@ -1440,7 +1722,7 @@ backgroud-color: #fffffc;
                    <property name="styleSheet">
                     <string notr="true">QListView
 {
-backgroud-color: #fffffc;
+background-color: #fffffc;
 color: xffffc;
 }</string>
                    </property>
@@ -1497,7 +1779,6 @@ color: xffffc;
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
@@ -2074,6 +2355,19 @@ selection-color: #fffffc;
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>CustomButton</class>
+   <extends>QPushButton</extends>
+   <header location="global">CustomButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CustomWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">CustomWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
