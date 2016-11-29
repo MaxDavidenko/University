@@ -33,5 +33,7 @@
         <file>gallery/searchButton.png</file>
         <file>gallery/settingsWindowButton.png</file>
         <file>gallery/transparentButton.png</file>
+        <file>gallery/arrow.png</file>
+        <file>gallery/transparent.png</file>
     </qresource>
 </RCC>

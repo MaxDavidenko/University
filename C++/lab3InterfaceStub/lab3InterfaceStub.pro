@@ -16,16 +16,23 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     CustomButton.cpp \
     CustomWidget.cpp \
-    customdialog.cpp
+    customdialog.cpp \
+    CustomStackedWidget.cpp \
+    CustomListWidget.cpp \
+    NewProjectMasterCreator.cpp
 
 HEADERS  += mainwindow.h \
     CustomButton.h \
     CustomWidget.h \
-    customdialog.h
+    customdialog.h \
+    CustomStackedWidget.h \
+    CustomListWidget.h \
+    NewProjectMasterCreator.h
 
 FORMS    += mainwindow.ui \
     settings.ui \
-    createnewdialog.ui
+    createnewdialog.ui \
+    newproject.ui
 
 RESOURCES += \
     gallery.qrc

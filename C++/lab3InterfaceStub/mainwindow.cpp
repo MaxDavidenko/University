@@ -2,11 +2,16 @@
 #include "ui_mainwindow.h"
 #include "ui_settings.h"
 #include "ui_createnewdialog.h"
+#include "ui_newproject.h"
 #include <QVBoxLayout>
 #include <QFileDialog>
 #include <QTimer>
 #include <QMessageBox>
 #include <customdialog.h>
+#include "CustomStackedWidget.h"
+#include <memory>
+#include <QScopedPointer>
+#include "NewProjectMasterCreator.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -45,10 +50,10 @@ void MainWindow::changeGlobalCursor()
 
 void MainWindow::showSettingPanel()
 {
-    QWidget * widget = new QWidget();
-    QPropertyAnimation * animation = new QPropertyAnimation(widget,"windowOpacity");
+    QScopedPointer<QWidget> widget(new QWidget());
+    QPropertyAnimation * animation = new QPropertyAnimation(widget.data(),"windowOpacity");
     Ui::Form ui2;
-    ui2.setupUi(widget);
+    ui2.setupUi(widget.data());
     QObject::connect(ui2.listWidget, SIGNAL(currentRowChanged(int)),
                      ui2.stackedWidget, SLOT(setCurrentIndex(int)));
     widget->setGeometry(100,100,100,100);
@@ -103,10 +108,8 @@ void MainWindow::on_exportProjectButton_clicked()
 void MainWindow::on_createNewFileButton_clicked()
 {
 
-    QDialog * widget = new QDialog();
+    NewProjectMasterCreator * widget = new NewProjectMasterCreator();
     QPropertyAnimation * animation = new QPropertyAnimation(widget,"windowOpacity");
-    Ui::Dialog ui2;
-    ui2.setupUi(widget);
     widget->setGeometry(100,100,100,100);
     animation->setDuration(1000);
     animation->setStartValue(0.0);
@@ -114,16 +117,7 @@ void MainWindow::on_createNewFileButton_clicked()
     animation->setEasingCurve(QEasingCurve::OutBack);
     animation->start();
     widget->show();
-    QObject::connect(ui2.NewProjectButton, SIGNAL(clicked(bool)), this, SLOT(showDialogMenu()));
-    ui2.comboBox->addItem("Class Diagram");
-    ui2.comboBox->addItem("Use Case Diagram");
-    ui2.comboBox->addItem("Sequence Diagram");
-    ui2.comboBox->addItem("Sequence Diagram");
-    ui2.comboBox->addItem("State Diagram");
-    ui2.comboBox->addItem("Activity Diagram");
-    ui2.comboBox->addItem("Collaboration Diagram");
-    ui2.comboBox->addItem("Deployment Diagram");
-    QObject::connect(ui2.checkBox, SIGNAL(clicked(bool)),ui2.comboBox, SLOT(setEnabled(bool)));
+
 }
 
 void MainWindow::on_settingsButton_clicked()
@@ -147,12 +141,12 @@ void MainWindow::on_createClassDiagramButton_toggled(bool checked)
 
 void MainWindow::on_createNewDiagramOfPrecendenceButton_toggled(bool checked)
 {
-  /*  if (checked)
+    if (checked)
     {
         QPixmap pixmap(":/new/prefix1/gallery/createNewDiagramOfPrecendenceButton.png");
         QCursor cursor(pixmap);
         this->setCursor(cursor);
-    }*/
+    }
 }
 
 
