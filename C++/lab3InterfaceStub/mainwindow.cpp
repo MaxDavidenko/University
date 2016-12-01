@@ -50,10 +50,10 @@ void MainWindow::changeGlobalCursor()
 
 void MainWindow::showSettingPanel()
 {
-    QScopedPointer<QWidget> widget(new QWidget());
-    QPropertyAnimation * animation = new QPropertyAnimation(widget.data(),"windowOpacity");
+    QWidget *widget = new QWidget();
+    QPropertyAnimation * animation = new QPropertyAnimation(widget,"windowOpacity");
     Ui::Form ui2;
-    ui2.setupUi(widget.data());
+    ui2.setupUi(widget);
     QObject::connect(ui2.listWidget, SIGNAL(currentRowChanged(int)),
                      ui2.stackedWidget, SLOT(setCurrentIndex(int)));
     widget->setGeometry(100,100,100,100);

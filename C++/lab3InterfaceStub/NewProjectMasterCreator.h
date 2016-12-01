@@ -22,6 +22,8 @@ private slots:
 
     void on_BrowseCodeButton_clicked();
 
+    void checkFieldsOnEmpty();
+
 private:
     Ui::NewProjectForm *ui;
 

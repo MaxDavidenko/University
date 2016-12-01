@@ -29,10 +29,12 @@ NewProjectMasterCreator::NewProjectMasterCreator(QWidget *parent):
                      SLOT(changeNextRowIcon()));
     QObject::connect(ui->PrevPageButton, SIGNAL(clicked(bool)), ui->listWidget,
                      SLOT(changePrevRowIcon()));
-    QObject::connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setTemplateInfo()));
-
+    QObject::connect(ui->comboBox, SIGNAL(currentIndexChanged(int)),
+                     this, SLOT(setTemplateInfo()));
     QObject::connect(ui->comboBox_2, SIGNAL(currentIndexChanged(int)),
                      this, SLOT(setCodeReverseIngeneeringInfo()));
+    QObject::connect(ui->projectPathLine, SIGNAL(editingFinished()),
+                     this, SLOT(checkFieldsOnEmpty()));
 }
 
 void NewProjectMasterCreator::on_pushBrowsePathButton_clicked()
@@ -66,11 +68,34 @@ void NewProjectMasterCreator::setTemplateInfo()
 }
 void NewProjectMasterCreator::setCodeReverseIngeneeringInfo()
 {
-    /*QString currStr = ui->comboBox_2->currentText();
-    if (currStr == "C++")
-        ui->labelSourceCode->setText(ui->comboBox_2->currentText() + QString(".h"));
-    else if (ui->comboBox_2->currentText() == "C#")
-        ui->labelSourceCode->setText(ui->comboBox_2->currentText() + QString(".sharpina"));
-    else if (ui->comboBox_2->currentText() == "Java")
-        ui->labelSourceCode->setText(ui->comboBox_2->currentText() +QString(".java"));*/
+
+}
+
+void NewProjectMasterCreator::checkFieldsOnEmpty()
+{
+    QPalette pal1 = ui->projectNameLine->palette();
+    pal1.setColor(ui->projectNameLine->backgroundRole(), Qt::red);
+    QPalette pal2 = ui->projectPathLine->palette();
+    pal2.setColor(ui->projectPathLine->backgroundRole(), Qt::red);
+
+    if (ui->projectNameLine->text() == "")
+        ui->projectNameLine->setStyleSheet("background-color: #c70000");
+    else
+    {
+        pal1.setColor(QPalette::Base, Qt::white);
+        ui->projectNameLine->setPalette(pal1);
+        ui->projectNameLine->setStyleSheet("background-color: #ffffff");
+
+    }
+
+    if (ui->projectPathLine->text() == "")
+    {
+        ui->projectPathLine->setStyleSheet("background-color: #c70000");
+    }
+    else
+    {
+        pal2.setColor(QPalette::Base, Qt::white);
+        ui->projectPathLine->setPalette(pal2);
+        ui->projectPathLine->setStyleSheet("background-color: #ffffff");
+    }
 }
