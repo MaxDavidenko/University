@@ -14,11 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-		refactor.cpp \
-    highlighter.cpp
+        refactor.cpp \
+        highlighter.cpp \
+        refactoring.cpp
 
 HEADERS  += widget.h \
-			refactor.h \
-    highlighter.h
+            refactor.h \
+            highlighter.h \
+            refactoring.h
 
 FORMS    += widget.ui

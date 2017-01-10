@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>gallery/addAgregationLinkButton.png</file>
+        <file>gallery/addAssociationLinkButton.png</file>
+        <file>gallery/addClassOnDiagrammButton.png</file>
+        <file>gallery/addCommentLingOnDiagramButton.png</file>
+        <file>gallery/addCommentOnDiagramButton.png</file>
+        <file>gallery/addCompositionLinkButton.png</file>
+        <file>gallery/addDiagramPacketButton.png</file>
+        <file>gallery/addFiniteLinkButton.png</file>
+        <file>gallery/addGeneralizationLinkButton.png</file>
+        <file>gallery/addLinkToDiagramButton.png</file>
+        <file>gallery/addNewInterfaceOnDiagramButton.png</file>
+        <file>gallery/addRealizationLinkOnDiagramButton.png</file>
+        <file>gallery/closeProjectButton.png</file>
+        <file>gallery/createActivityDiagramButton.png</file>
+        <file>gallery/createAssociationClassButton.png</file>
+        <file>gallery/createClassDiagramButton.png</file>
+        <file>gallery/createCommunicationDiagramButton.png</file>
+        <file>gallery/createDeployDiagramButton.png</file>
+        <file>gallery/createNewAttributeButton.png</file>
+        <file>gallery/createNewDiagramOfPrecendenceButton.png</file>
+        <file>gallery/createNewOperationButton.png</file>
+        <file>gallery/createNewProjectButton.png</file>
+        <file>gallery/createSequenceDiagramButton.png</file>
+        <file>gallery/createStateDiagramButton.png</file>
+        <file>gallery/exportButton.png</file>
+        <file>gallery/functionallityPictogramButton.png</file>
+        <file>gallery/openExistingFileButton.png</file>
+        <file>gallery/revertLastChangesButton.png</file>
+        <file>gallery/revertLastRevertButton.png</file>
+        <file>gallery/SaveProjectButton.png</file>
+        <file>gallery/searchButton.png</file>
+        <file>gallery/settingsWindowButton.png</file>
+        <file>gallery/transparentButton.png</file>
+    </qresource>
+</RCC>

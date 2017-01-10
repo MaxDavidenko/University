@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>gallery/settingsWindow.png</file>
+        <file>gallery/search.png</file>
+        <file>gallery/SaveProject.png</file>
+        <file>gallery/revertLastRevert.png</file>
+        <file>gallery/revertLastChanges.png</file>
+        <file>gallery/openExistingFile.png</file>
+        <file>gallery/functionallityPictogram.png</file>
+        <file>gallery/export.png</file>
+        <file>gallery/createStateDiagram.png</file>
+        <file>gallery/createSequenceDiagram.png</file>
+        <file>gallery/createNewProject.png</file>
+        <file>gallery/createNewOperation.png</file>
+        <file>gallery/createNewDiagramOfPrecendence.png</file>
+        <file>gallery/createNewAttribute.png</file>
+        <file>gallery/createDeployDiagram.png</file>
+        <file>gallery/createCommunicationDiagram.png</file>
+        <file>gallery/createClassDiagram.png</file>
+        <file>gallery/createAssociationClass.png</file>
+        <file>gallery/createActivityDiagram.png</file>
+        <file>gallery/closeProject.png</file>
+        <file>gallery/addRealizationLinkOnDiagram.png</file>
+        <file>gallery/addNewInterfaceOnDiagram.png</file>
+        <file>gallery/addLinkToDiagram.png</file>
+        <file>gallery/addGeneralizationLink.png</file>
+        <file>gallery/addFiniteLink.png</file>
+        <file>gallery/addDiagramPacket.png</file>
+        <file>gallery/addCompositionLink.png</file>
+        <file>gallery/addCommentOnDiagram.png</file>
+        <file>gallery/addCommentLingOnDiagram.png</file>
+        <file>gallery/addClassToDiagramm.png</file>
+        <file>gallery/addAssociationLink.png</file>
+        <file>gallery/addAgregationLink.png</file>
+        <file>gallery/transparent.png</file>
+    </qresource>
+</RCC>

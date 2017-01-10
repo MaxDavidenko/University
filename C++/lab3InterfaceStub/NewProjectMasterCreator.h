@@ -24,6 +24,12 @@ private slots:
 
     void checkFieldsOnEmpty();
 
+    void on_NextPageButton_clicked();
+
+    void on_PrevPageButton_clicked();
+
+    void on_CancelButton_clicked();
+
 private:
     Ui::NewProjectForm *ui;
 

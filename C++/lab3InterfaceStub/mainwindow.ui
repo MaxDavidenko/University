@@ -1400,7 +1400,7 @@ color:  #394040;
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="propertiesTab">
            <property name="accessibleName">
@@ -1716,7 +1716,14 @@ backgroud-color: #fffffc;
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_6">
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                <layout class="QVBoxLayout" name="verticalLayout_2">
+                 <item>
+                  <widget class="QLabel" name="label">
+                   <property name="text">
+                    <string>ToDo items:</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QListView" name="listView">
                    <property name="styleSheet">
@@ -1754,6 +1761,25 @@ color: xffffc;
                  <property name="rightMargin">
                   <number>50</number>
                  </property>
+                 <item>
+                  <widget class="QLabel" name="label_2">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>ToDo item:</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QLineEdit" name="lineEdit"/>
                  </item>

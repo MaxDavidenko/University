@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/res1">
+        <file>img.png</file>
+        <file>FAQ.txt</file>
+        <file>Homepage.html</file>
+        <file>info.png</file>
+        <file>alert.png</file>
+    </qresource>
+</RCC>

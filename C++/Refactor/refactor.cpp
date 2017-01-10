@@ -1,6 +1,7 @@
 #include "refactor.h"
 #include <QVector>
 #include <iostream>
+#include <QRegularExpression>
 Refactor::Refactor() {
     
 }
@@ -37,102 +38,76 @@ QString Refactor::rename(QString sourceCode, QString sourceVar, QString resultVa
 }
 
 QString Refactor::formatting(QString sourceCode) {
-    AlignScopes(sourceCode);
-    toStartPosition(sourceCode);
-    blocksFormatting(sourceCode, 0, sourceCode.size(), 0);
+    alignToLeftSide(sourceCode);
+    alignScopes(sourceCode);
+    alignBlocks(sourceCode, 0, sourceCode.size(), 0);
     std::cout << sourceCode.toStdString() << '\n';
     return sourceCode;
 }
 
-
-void Refactor::toStartPosition(QString & text)
+void Refactor::alignToLeftSide(QString &text)
 {
-    int end = text.size();
-    int next = 0;
-    QVector<int>  expr_end;
-    for (int start = 0; start < end && start >= 0;++start)
-    {
-        if ((start =  text.indexOf('\n', start + 1)) < 0)
-            break;
-      expr_end.push_back(text.indexOf(QRegExp("[\\/\\*]"), start));
-      expr_end.push_back(text.indexOf(QRegExp("[\\*\\/]"), start));
-      expr_end.push_back(text.indexOf(QRegExp("[-\\w]"), start));
-      expr_end.push_back(text.indexOf(QRegExp("[\\{]"), start));
-      expr_end.push_back(text.indexOf(QRegExp("[\\}]"), start));
-      for (int i = 0; i < expr_end.size();++i)
-            if(expr_end.at(i) == -1)
-                expr_end[i] = INT32_MAX;
-      next = (*std::min_element(expr_end.data(), expr_end.data()
-                                + expr_end.size()));
-      text.replace(start, next - start, "\n");
-      expr_end.clear();
-    }
+    text.replace(QRegExp("\\n\\s+|\\t+\\<"),"\n");
+    //  ((\/\/|\/\*|\*).*\{) -> все те, которые заключены в коментарий
 }
-void Refactor::AlignScopes(QString & text)
+bool Refactor::checkOnComment(QString &text, int start)
 {
-    int start = text.indexOf('{');
-    int start2 = text.indexOf('}');
-    QVector<int>  expr_end;
-    int res = 0;
-    start = start < start2? start:start2;
-    int end = text.size();
-    while (start > 0 && start < end)
+    bool res = false;
+    int commentPos = text.indexOf(QRegExp("//|[/\\*]"), start);
+    int scopePos =  text.indexOf(QRegExp("\\{|\\}"), start);
+    int nextAfterStart = text.indexOf("\n", scopePos);
+    if (start != text.lastIndexOf("\n",scopePos))
+        return false;
+    if ((scopePos > start) && start > 0 && (scopePos > commentPos)
+            && commentPos > 0 && (scopePos < nextAfterStart)
+            && nextAfterStart > 0)
     {
-        expr_end.clear();
-        if ( text.at(start - 1) != '\n' &&
-           (text.at(start) == '{' || text.at(start) == '}'))
-        {
-            expr_end.push_back(text.lastIndexOf('\n', start));
-            expr_end.push_back(text.indexOf('\n', start + 1));
-            expr_end.push_back(text.lastIndexOf(QRegExp("\\/\\*"), start));
-            expr_end.push_back(text.lastIndexOf(QRegExp("\\*"), start));
-            expr_end.push_back(text.lastIndexOf("//", start));
-            for (int i = 1; i < expr_end.size();++i)
-                  if(expr_end.at(i) == -1 || expr_end.at(i) < expr_end[0])
-                      expr_end[i] = INT32_MAX;
-            res = (*std::min_element(expr_end.data() + 2, expr_end.data()
-                                      + expr_end.size()));
-
-            if (res >= expr_end[0] && res < expr_end[1] && res < start)
-            {
-                start +=1;
-                continue;
-            }
-            QString st('\n');
-            st.append(text.at(start));
-            if (text.at(start +1) != '\n')
-            st.append('\n');
-            //st.append(text.at(start +1));
-            text.replace(start, 1, "");
-            text.insert(start, st);
-            end = text.size();
-        }
-        start = text.indexOf("{", start +4, Qt::CaseInsensitive);
-        start2 = text.indexOf("}", start +4, Qt::CaseInsensitive);
-        start = start < start2? start:start2;
+        res = true;
     }
+    return  res;
 }
+void Refactor::alignScopes(QString &text)
+{
+   std::string tmp_str(text.toStdString());
+   std::reverse(tmp_str.begin(), tmp_str.end());
+   text.clear();
+   text += tmp_str.c_str();
+   std::cout << text.toStdString() << "\n\n\n";
+   text.replace(QRegularExpression("\\s*\\t*\\{\\s*\\t*(?!(.*(\\/\\/|\\*\\/)))"), "\n{\n");
+   text.replace(QRegularExpression("\\s*\\t*\\}\\s*\\t*(?!(.*(\\/\\/|\\*\\/)))"), "\n}\n");
+   text.replace(QRegularExpression("\\n+"),"\n");
+   tmp_str.clear();
+   tmp_str += text.toStdString();
+   std::reverse(tmp_str.begin(), tmp_str.end());
+   text.clear();
+   text += tmp_str.c_str();
 
-int Refactor::blocksFormatting(QString & text, int start, int end, int count)
+}
+int Refactor::alignBlocks(QString & text, int start, int end, int count)
 {
    while (start < end -1 && start >= 0)
    {
-      if (text.at(start +1) == '{')
+      if (text.at(start +1) == '{' &&
+          !checkOnComment(text, text.lastIndexOf(QRegExp("\\n"), start)))
       {
-          align(text,start, end, count);
+          addDelimiters(text,start, end, count);
           start = text.indexOf('\n', start +1);
           count += 1;
-          continue;
       }
-      else if (text.at(start +1) == '}')
+      else if (text.at(start +1) == '}' &&
+               !checkOnComment(text, text.lastIndexOf(QRegExp("\\n"), start)))
+      {
           count -= 1;
-      align(text, start, end, count);
+      }
+      addDelimiters(text, start, end, count);
       start = text.indexOf('\n', start +1);
    }
    return start;
 }
-void Refactor::align(QString &text,int &start, int & end, int count) {
+void Refactor::addDelimiters(QString &text,int &start, int & end, int count)
+{
     text.insert(start+1, QString(count*4, ' '));
-    //std::cout << text.toStdString() << '\n';
     end += count * 4;
 }
+
+

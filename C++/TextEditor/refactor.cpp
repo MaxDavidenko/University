@@ -43,6 +43,10 @@ QString Refactor::formatting(QString sourceCode) {
     alignBlocks(sourceCode, 0, sourceCode.size(), 0);
     alignBlocksWithoutScopes(sourceCode,
             QRegularExpression("if\\s*\\(*.*\\)\\s*\\n\\s*(?!\\{)\\b"));
+    alignBlocksWithoutScopes(sourceCode,
+            QRegularExpression("for\\s*\\(*.*\\)\\s*\\n\\s*(?!\\{)\\b"));
+    alignBlocksWithoutScopes(sourceCode,
+            QRegularExpression("while\\s*\\(*.*\\)\\s*\\n\\s*(?!\\{)\\b"));
     return sourceCode;
 }
 void Refactor::alignBlocksWithoutScopes(QString & sourceCode,

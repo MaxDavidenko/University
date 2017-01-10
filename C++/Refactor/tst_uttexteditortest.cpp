@@ -97,21 +97,23 @@ void UTTextEditorTest::testCase10()
 
 void UTTextEditorTest::testCase11()
 {
+    QString  str("int sqr()\n"
+                 "{\n"
+                 "    int a = 5;\n"
+                 "    return a*a;\n"
+                 "}\n");
     QCOMPARE(corrector.formatting("int sqr() { int a = 5;\nreturn a*a;\n}"),
-             QString("int sqr() \n"
-                     "{\n"
-                     "    int a = 5;\n"
-                     "    return a*a;\n"
-                     "}"));
+             str);
+    std::cout <<str.toStdString() << '\n';
 }
 
 void UTTextEditorTest::testCase12()
 {
-    QString str("int sqr() \n"
+    QString str("int sqr()\n"
                 "{\n"
                 "    int a = 5;\n"
                 "    return a*a;\n"
-                "}");
+                "}\n");
     std:: cout << str.toStdString() << "\n";
     QCOMPARE(corrector.formatting("int sqr() {\n int a = 5;\nreturn a*a;\n}"),
              //QString("int sqr()"
@@ -124,111 +126,132 @@ void UTTextEditorTest::testCase12()
 void UTTextEditorTest::testCase13()
 {
 
-    QString str("int f() \n"
+    QString str("int f()\n"
                 "{\n"
                 "    int a = 5;\n"
-                "    while(a > 0) \n"
-                "    {\n "
-                "       --a;\n"
+                "    while(a > 0)\n"
+                "    {\n"
+                "        --a;\n"
                 "    }\n"
                 "    return a*a;\n"
-                "}");
+                "}\n");
     QCOMPARE(corrector.formatting("int f() {\n int a = 5;\nwhile(a > 0) {"
                             " --a;\n }\n return a*a;\n }"),
     str);
 }
 void UTTextEditorTest::testCase14()
 {
-    QCOMPARE(corrector.formatting(" {static int MODE = FIGHT;"
+    QCOMPARE(corrector.formatting(" { static int MODE = FIGHT;"
                             "\n if (currentMode == FIGHT){\n"
                             "timer.start());\n}\n}"),
 
-             QString(" \n{\n"
+             QString("\n{\n"
                      "    static int MODE = FIGHT;\n"
                      "    if (currentMode == FIGHT)\n"
                      "    {\n"
                      "        timer.start());\n"
                      "    }\n"
-                     "}"));
+                     "}\n"));
 }
 void UTTextEditorTest::testCase15()
 {
     QCOMPARE(corrector.formatting("while (!writer.eof()){ writer >> str;\n"
-                             "if(str.find(\"12345 the rabbit went to the light\" {\n"
+                             "if(str.find(\"12345 the rabbit went to the light\") {\n"
                              "cout<< m;\n}\n}"),
             QString("while (!writer.eof())\n"
                     "{\n"
                     "    writer >> str;\n"
-                    "    if(str.find(\"12345 the rabbit went to the light\"\n"
+                    "    if(str.find(\"12345 the rabbit went to the light\")\n"
                     "    {\n"
                     "        cout<< m;\n"
                     "    }\n"
-                    "}"));
+                    "}\n"));
 }
 
 void UTTextEditorTest::testCase16()
 {
-    QCOMPARE(corrector.formatting("{\nint a = 10;\n{\n int b = 10;\n{\n int c = 11; {\nint d = 12;\n"
-                            "{\n bool res = a == b == c == d? true:false;\n }\n}\n}\n}\n}"),
-             QString("{\n"
-                     "    int a = 10;\n"
-                     "    {\n"
-                     "        int b = 10;\n"
-                     "        {\n"
-                     "            int c = 11;"
-                     "            {\n"
-                     "                int d = 12;\n"
-                     "                {\n"
-                     "                    bool res = a == b == c == d? true:false;\n"
-                     "                }\n"
-                     "            }\n}"
-                     "        }\n"
-                     "}"));
+    QString str("\n{\n"
+                 "    int a = 10;\n"
+                 "    {\n"
+                 "        int b = 10;\n"
+                 "        {\n"
+                 "            int c = 11;\n"
+                 "            {\n"
+                 "                int d = 12;\n"
+                 "                {\n"
+                 "                    bool res = a == b == c == d? true:false;\n"
+                 "                }\n"
+                 "            }\n"
+                 "        }\n"
+                 "    }\n"
+                 "}\n"
+            );
+    std::cout << str.toStdString() << "\n\n\n";
+    QCOMPARE(corrector.formatting("{\n"
+                                  "int a = 10;\n"
+                                  "{\n"
+                                  " int b = 10;\n"
+                                  "{\n"
+                                  " int c = 11; {\n"
+                                  "int d = 12;\n"
+                                  "{\n"
+                                  " bool res = a == b == c == d? true:false;\n"
+                                  " }\n"
+                                  "}\n"
+                                  "}"
+                                  "\n}"
+                                  "\n}"),
+             str);
 }
 
 void UTTextEditorTest::testCase17()
 {
     QCOMPARE(corrector.formatting("while (!writer.eof()){ writer >> str;\n "
-                                  "if(str.find(\"12345 the rabbit went to the light\")\n"
+                                  "//if(str.find(\"12345 the rabbit went to the light\") {\n"
                                   "//cout<<\"Wow!\";\n}"),
              QString("while (!writer.eof())\n"
-                     "{"
-                     "     writer >> str;\n"
-                     "     /*if(str.find(\"12345 the rabbit went to the light\")\n {*/"
-                     "     cout<<\"Wow!\";\n"
-                     "}"));
+                     "{\n"
+                     "    writer >> str;\n"
+                     "    //if(str.find(\"12345 the rabbit went to the light\") {\n"
+                     "    //cout<<\"Wow!\";\n"
+                     "}\n"));
     }
 void UTTextEditorTest::testCase18()
 {
     QCOMPARE(corrector.formatting("while (!writer.eof()){ writer >> str;\n "
                              "if(str.find(\"12345 the rabbit went to the light\")\n"
-                             "//cout<<\"Wow!\";\n}"),
+                             "//cout<<\"Wow!\";}\n"),
              QString("while (!writer.eof())\n"
-                     "{"
-                     "     writer >> str;\n"
-                     "     if(str.find(\"12345 the rabbit went to the light\")\n"
-                     "     //cout<<\"Wow!\";\n"
-                     "}"));
+                     "{\n"
+                     "    writer >> str;\n"
+                     "    if(str.find(\"12345 the rabbit went to the light\")\n"
+                     "    //cout<<\"Wow!\";}\n"));
 }
 
 void UTTextEditorTest::testCase19()
 {
     QCOMPARE(corrector.formatting("while (!writer.eof()){ writer >> str;\n "
-                            "/\nif(str.find(\"12345 the rabbit went to the light\"{\n"
-                            "/\\*cout<< \"(c)Max\";\n}\\*/\n cout<<\"Wow!\";\n}\n}"),
-                            QString("while (!writer.eof()){ writer >> str;\n "
-                            "/\nif(str.find(\"12345 the rabbit went to the light\"{\n"
-                            "/\\*cout<< \"(c)Maxxx\";\n}\\*/\n cout<<\"Wow!\";\n}\n}"));
+                                  "if(str.find(\"12345 the rabbit went to the light\")\n"
+                                  "/*cout<<\"Wow!\";}"),
+              QString("while (!writer.eof())\n"
+                      "{\n"
+                      "    writer >> str;\n"
+                      "    if(str.find(\"12345 the rabbit went to the light\")\n"
+                      "    /*cout<<\"Wow!\";}"));
 }
+
 
 void UTTextEditorTest::testCase20()
 {
     QCOMPARE(corrector.formatting("while (!writer.eof()){ writer >> str;\n "
-                            "/\nif(str.find(\"12345 the rabbit went to the light\"{\n"
-                            "/\\*cout<< \"(c)Max\";\n}\\*/\n cout<<\"Wow!\";\n}\n}\n\t"),
-                            QString("while (!writer.eof()){ writer >> str;\n "
-                            "//if(str.find(\"12345 the rabbit went to the light\"{\n"
-                            "\t/\\*cout<< \"(c)Max\";\n}\\*/\n cout<<\"Wow!\";\t\n}\n}\n\t"));
+                            "//if(str.find(\"12345 the rabbit went to the light\"){\n"
+                            "/*cout<< \"(c)Max\"; } cout<<\"Wow!\";}}\n\t"),
+                            QString("while (!writer.eof())\n"
+                                    "{\n"
+                                    "    writer >> str;\n"
+                                    "    //if(str.find(\"12345 the rabbit went to the light\"){\n"
+                                    "    /*cout<< \"(c)Max\"; } cout<<\"Wow!\";}"
+                                    "}\n"));
 }
 QTEST_APPLESS_MAIN(UTTextEditorTest)
 

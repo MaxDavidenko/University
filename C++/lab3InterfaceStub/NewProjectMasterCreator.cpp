@@ -17,14 +17,6 @@ NewProjectMasterCreator::NewProjectMasterCreator(QWidget *parent):
         ui->listWidget->item(i)->setIcon(QIcon(":new/prefix1/gallery/transparent.png"));
     }
     ui->listWidget->currentItem()->setIcon(QIcon(":new/prefix1/gallery/arrow.png"));
-    QObject::connect(ui->NextPageButton, SIGNAL(clicked(bool)), ui->stackedWidget,
-                     SLOT(setNextPage()));
-    QObject::connect(ui->PrevPageButton, SIGNAL(clicked(bool)), ui->stackedWidget,
-                     SLOT(setPrevPage()));
-    QObject::connect(ui->CancelButton, SIGNAL(clicked(bool)), this, SLOT(close()));
-    QObject::connect(ui->stackedWidget, SIGNAL(closeDialog()), this, SLOT(close()));
-    QObject::connect(ui->stackedWidget, SIGNAL(changeNextButtonToFinish(QString)), ui->NextPageButton,
-                     SLOT(setWindowTitle(QString)));
     QObject::connect(ui->NextPageButton, SIGNAL(clicked(bool)), ui->listWidget,
                      SLOT(changeNextRowIcon()));
     QObject::connect(ui->PrevPageButton, SIGNAL(clicked(bool)), ui->listWidget,
@@ -98,4 +90,37 @@ void NewProjectMasterCreator::checkFieldsOnEmpty()
         ui->projectPathLine->setPalette(pal2);
         ui->projectPathLine->setStyleSheet("background-color: #ffffff");
     }
+}
+
+void NewProjectMasterCreator::on_NextPageButton_clicked()
+{
+    if (ui->stackedWidget->currentIndex() == 1 &&
+            (ui->projectNameLine->text() == "" ||
+             ui->projectPathLine->text() == ""))
+    {
+        checkFieldsOnEmpty();
+        ui->listWidget->setCurrentRow(ui->listWidget->currentRow() -1);
+        return;
+    }
+    if (ui->stackedWidget->currentIndex() == ui->stackedWidget->count() -1)
+        this->close();
+    if (ui->stackedWidget->currentIndex() < ui->stackedWidget->count())
+    {
+        ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() + 1);
+        if (ui->stackedWidget->currentIndex() == ui->stackedWidget->count() -1)
+            ui->NextPageButton->setText("Finish");
+        else
+            ui->NextPageButton->setText("Next");
+    }
+}
+
+void NewProjectMasterCreator::on_PrevPageButton_clicked()
+{
+    if (ui->stackedWidget->currentIndex() > 0)
+        ui->stackedWidget->setCurrentIndex(ui->stackedWidget->currentIndex() - 1);
+}
+
+void NewProjectMasterCreator::on_CancelButton_clicked()
+{
+    this->close();
 }

@@ -50,7 +50,9 @@ void MainWindow::changeGlobalCursor()
 
 void MainWindow::showSettingPanel()
 {
-    QWidget *widget = new QWidget();
+
+    QWidget * widget(new QWidget());
+    widget->setAttribute(Qt::WA_DeleteOnClose);
     QPropertyAnimation * animation = new QPropertyAnimation(widget,"windowOpacity");
     Ui::Form ui2;
     ui2.setupUi(widget);
@@ -75,7 +77,7 @@ void MainWindow::showDialogMenu()
 void MainWindow::on_saveButton_clicked()
 {
     QFileDialog saveDialog;
-    saveDialog.getSaveFileName(this,"Save files", QDir::currentPath());
+    saveDialog.getSaveFileName(this,"Save files", QDir::currentPath(), "*.suml");
      QMessageBox::critical(this, this->objectName(),
                                  tr("Error to save a file.\n"
                                  "Choose another name!\n"),
@@ -86,13 +88,7 @@ void MainWindow::on_saveButton_clicked()
 void MainWindow::on_OpenButton_clicked()
 {
     QFileDialog openDialog;
-    openDialog.getOpenFileNames(this, "Open files", QDir::currentPath());
-    QFileDialog saveDialog;
-    saveDialog.getSaveFileName(this,"Save files", QDir::currentPath());
-     QMessageBox::critical(this, this->objectName(),
-                                 tr("Error occured while file is opening.\n"
-                                 "Choose another name!\n"),
-                                 QMessageBox::Ok);
+    openDialog.getOpenFileNames(this, "Open files", QDir::currentPath(), "*.suml");
 }
 
 void MainWindow::on_exportProjectButton_clicked()
@@ -109,6 +105,7 @@ void MainWindow::on_createNewFileButton_clicked()
 {
 
     NewProjectMasterCreator * widget = new NewProjectMasterCreator();
+    widget->setAttribute(Qt::WA_DeleteOnClose);
     QPropertyAnimation * animation = new QPropertyAnimation(widget,"windowOpacity");
     widget->setGeometry(100,100,100,100);
     animation->setDuration(1000);
