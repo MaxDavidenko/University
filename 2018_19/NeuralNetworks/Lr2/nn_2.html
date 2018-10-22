@@ -1,0 +1,165 @@
+<html><title>Лабораторная работа № 2.</title>
+<body>
+<font size=4>
+<center><b>Лабораторная работа № 2.<br><br>
+Построение многослойной полносвязной нейронной сети средствами NeuroOffice99.<br></b></center>
+<br>
+<i><b>Цель работы:</b> Научиться создавать и обучать многослойные нейронные сети. <br></i>
+<b>Задание:</b><i> Создать нейронную сеть со структурой "многослойный персептрон", и обучить ее распознаванию цифр, заданных пиксельной матрицей размером 5*7 клеток, согласно своего варианта задания. Обучение произвести по методу обратного распространения ошибки</i>.<br>
+<br>
+<center><b>Ход работы:<br></b></center><br>
+<b>1.</b> Выбрать структуру нейронной сети, способной выполнить распознавание цифр согласно задания на лабораторную работу.<br>
+<b>2.</b> Разработать векторы реакций сети на предъявляемые цифры (эталонные выходные данные) по предложенным вариантам с учетом дополнительных функций распознавания. Например, для цифры "1" нейрон выходного слоя, определяющий четность, не должен быть активным; из остальных нейронов активным должен быть только тот, который предназначен для распознавания единицы. Массивы входных данных находятся в файлах CSV. Файлы содержат по 10 изображений цифр размером 5 на 7 точек, развернутых в векторы длиной 35 элементов каждый.<br>
+<b>3.</b> Обучить нейронную сеть на сформированных в п. 2 обучающих выборках.<br>
+<b>4.</b> Оценить временные затраты на обучение сети.<br>
+<b>5.</b> При затраченном времени на обучение более 10 минут - создать новую схему нейронной сети и обучить ее.<br>
+<b>6.</b> Оформить отчет в электронном виде. Состав отчета:<br>
+&nbsp&nbsp&nbsp<b>*</b> номер и наименование лабораторной работы;<br>
+&nbsp&nbsp&nbsp<b>*</b> задание на лабораторную работу;<br>
+&nbsp&nbsp&nbsp<b>*</b> описание топологии сети; <br>
+&nbsp&nbsp&nbsp<b>*</b> входные данные; <br>
+&nbsp&nbsp&nbsp<b>*</b> эталонные выходные данные; <br>
+&nbsp&nbsp&nbsp<b>*</b> полученные выходные данные;<br>
+&nbsp&nbsp&nbsp<b>*</b> выводы.<br>
+<b></b> <br>
+<center><b>Варианты заданий<br></b></center><br>
+В качестве входных данных предлагаются 5 файлов Excel CSV, каждый из которых содержит по 10 изображений цифр в виде матрицы 5 на 7 пикселов, развернутых в векторы длиной по 35 элементов каждый. Векторы находятся в строках.<br><br>
+<a href="input1.csv"><b>Набор №1.</b></a> Изображения 10 цифр (от 0 до 9) в нормальной ориентации.<br><br>
+<a href="input2.csv"><b>Набор №2.</b></a> Изображения 5 цифр (от 0 до 4) в нормальной ориентации (первые 5 векторов) и в перевернутом виде (следующие 5 векторов).<br><br>
+<a href="input3.csv"><b>Набор №3.</b></a> Изображения 5 цифр (от 5 до 9) в нормальной ориентации (первые 5 векторов) и в "зеркальном" виде по вертикали (следующие 5 векторов).<br><br>
+<a href="input4.csv"><b>Набор №4.</b></a> Изображения 10 цифр (от 0 до 9) в  "зеркальном" виде по горизонтали.<br><br>
+<a href="input5.csv"><b>Набор №5.</b></a> Изображения 5 цифр (от 5 до 9) в перевернутом виде (первые 5 векторов) и в "зеркальном" виде по горизонтали (следующие 5 векторов).<br><br>
+<br>
+<table width="100%" cellspacing="0" cellpadding="0" border="1" bordercolor="#666666">
+<tr>
+    <td align="center"><strong>Номер варианта</strong></td>
+    <td align="center"><strong>Набор данных</strong></td>
+    <td align="center"><strong>Дополнительная функция распознавания</strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>1</strong></td>
+    <td align="center"><strong><a href="input1.csv">№1</a></strong></td>
+    <td align="center"><strong>Распознать четность цифры </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>2</strong></td>
+    <td align="center"><strong><a href="input1.csv">№1</a></strong></td>
+    <td align="center"><strong>Распознать нечетность цифры </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>3</strong></td>
+    <td align="center"><strong><a href="input2.csv">№2</a> </strong></td>
+    <td align="center"><strong>Распознать нечетность цифры</strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>4</strong></td>
+    <td align="center"><strong><a href="input1.csv">№1</a> </strong></td>
+    <td align="center"><strong>Распознать все степени числа 2 </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>5</strong></td>
+    <td align="center"><strong><a href="input4.csv">№4</a></strong></td>
+    <td align="center"><strong>Распознать все степени числа 2 </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>6</strong></td>
+    <td align="center"><strong><a href="input4.csv">№4</a></strong></td>
+    <td align="center"><strong>Распознать нечетность цифры </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>7</strong></td>
+    <td align="center"><strong><a href="input5.csv">№5</a></strong></td>
+    <td align="center"><strong>Распознать нечетность цифры</strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>8</strong></td>
+    <td align="center"><strong><a href="input3.csv">№3</a></strong></td>
+    <td align="center"><strong>Распознать простые числа </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>9</strong></td>
+    <td align="center"><strong><a href="input4.csv">№4</a></strong></td>
+    <td align="center"><strong>Распознать простые числа</strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>10</strong></td>
+    <td align="center"><strong><a href="input1.csv">№1</a></strong></td>
+    <td align="center"><strong>Распознать простые числа </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>11</strong></td>
+    <td align="center"><strong><a href="input2.csv">№2</a></strong></td>
+    <td align="center"><strong>Распознать числа, делящиеся на 3 без остатка</strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>12</strong></td>
+    <td align="center"><strong><a href="input1.csv">№2</a></strong></td>
+    <td align="center"><strong>Распознать простые числа </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>13</strong></td>
+    <td align="center"><strong><a href="input3.csv">№3</a></strong></td>
+    <td align="center"><strong>Распознать нечетность цифры </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>14</strong></td>
+    <td align="center"><strong><a href="input3.csv">№3</a></strong></td>
+    <td align="center"><strong>Распознать все степени числа 2 </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>15</strong></td>
+    <td align="center"><strong><a href="input5.csv">№5</a></strong></td>
+    <td align="center"><strong>Распознать четность цифры </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>16</strong></td>
+    <td align="center"><strong><a href="input5.csv">№5</a></strong></td>
+    <td align="center"><strong>Распознать простые числа </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>17</strong></td>
+    <td align="center"><strong><a href="input5.csv">№2</a></strong></td>
+    <td align="center"><strong>Распознать четность цифры </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>18</strong></td>
+    <td align="center"><strong><a href="input5.csv">№5</a></strong></td>
+    <td align="center"><strong>Распознать числа, делящиеся на 3 без остатка </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>19</strong></td>
+    <td align="center"><strong><a href="input1.csv">№1</a></strong></td>
+    <td align="center"><strong>Распознать числа, делящиеся на 3 без остатка</strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>20</strong></td>
+    <td align="center"><strong><a href="input3.csv">№3</a></strong></td>
+    <td align="center"><strong>Распознать числа, делящиеся на 3 без остатка </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>21</strong></td>
+    <td align="center"><strong><a href="input4.csv">№4</a></strong></td>
+    <td align="center"><strong>Распознать четность цифры </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>22</strong></td>
+    <td align="center"><strong><a href="input4.csv">№4</a></strong></td>
+    <td align="center"><strong>Распознать числа, делящиеся на 3 без остатка </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>23</strong></td>
+    <td align="center"><strong><a href="input2.csv">№2</a></strong></td>
+    <td align="center"><strong>Распознать все степени числа 2 </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>24</strong></td>
+    <td align="center"><strong><a href="input5.csv">№5</a></strong></td>
+    <td align="center"><strong>Распознать все степени числа 2 </strong></td>
+</tr>
+<tr>
+    <td align="center"><strong>25</strong></td>
+    <td align="center"><strong><a href="input3.csv">№3</a></strong></td>
+    <td align="center"><strong>Распознать четность цифры </strong></td>
+</tr>
+</table>
+</body></html>
